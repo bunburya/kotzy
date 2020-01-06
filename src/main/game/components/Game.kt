@@ -17,6 +17,7 @@ class Game (val rules: ScoringRules, private val initialPlayerNames: Iterable<St
     val currentPlayerName: String get() = players.currentPlayerName
     val currentPlayer: Player get() = players.currentPlayer
     val numPlayers: Int get() = players.numPlayers
+    fun nextPlayer(): Pair<String, Player> = players.nextPlayer()
 
     fun addPlayer(name: String) {
         if (inProgress) throw GameInProgressError("Cannot add players when game is in progress.")

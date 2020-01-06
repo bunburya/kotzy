@@ -42,9 +42,10 @@ class PlayerIterable(val game: Game, val initialPlayerNames: Iterable<String>): 
         currentPlayerNameIndex = playerNames.indexOf(name)
     }
 
-    fun nextPlayer() {
+    fun nextPlayer(): Pair<String, Player> {
         if (currentPlayerNameIndex < playerNames.size-1) currentPlayerNameIndex++
         else currentPlayerNameIndex = 0
+        return Pair(currentPlayerName, currentPlayer)
     }
 
     override fun iterator(): PlayerIterator = PlayerIterator(this)

@@ -58,6 +58,14 @@ abstract class Win: SpecialAction {
     }
 }
 
+abstract class AutoScore(val category: Category, val customScore: Int? = null, val endTurn: Boolean): SpecialAction {
+    override fun equals(other: Any?): Boolean {
+        if (other == null) return false
+        if (other !is AutoScore) return false
+        return (category == other.category) && (customScore == other.customScore) && (endTurn == other.endTurn)
+    }
+}
+
 abstract class ScoringRules {
     // Base class for scoring rules.  Defines the required interface and also provides some sane defaults and helper
     // functions based on those rules which are common to most game variants.
@@ -65,6 +73,7 @@ abstract class ScoringRules {
     abstract val lowerCategories: List<LowerCategory>
     open val numDice: Int = 5
     open val diceSides: Int = 6
+    open val numRolls = 3
     open val categories get() = upperCategories + lowerCategories
     open val upperBonus: Int? = null
     open val requiredUpperScoreForBonus: Int? = null
@@ -132,5 +141,3 @@ abstract class ScoringRules {
     }
 
 }
-
-class ScoreFunction
